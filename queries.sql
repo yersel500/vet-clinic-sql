@@ -14,7 +14,23 @@ ht_kg BETWEEN 10.4 AND 17.3;
 BEGIN;
 UPDATE animals
 SET species = 'unspecified';
+SELECT * FROM animals;
 ROLLBACK;
+SELECT * FROM animals;
+
+BEGIN;
+UPDATE animaltests SET species = 'digimon' WHERE name LIKE '%m
+on';
+UPDATE animaltests SET species = 'pokemon' WHERE species <> 'digimon';
+SELECT * FROM animaltests;
+COMMIT;
+SELECT * FROM animaltests;
+
+BEGIN;
+DELETE FROM animaltests;
+SELECT * FROM animaltests;
+ROLLBACK;
+SELECT * FROM animaltests;
 
 BEGIN;
 DELETE FROM animals WHERE date_of_birth > '2022-01-01';
@@ -28,5 +44,5 @@ SELECT COUNT(*) FROM animals;
 SELECT COUNT(escape_attempts) FROM animals WHERE escape_attempts = 0;
 SELECT AVG(weight_kg) FROM animals;
 SELECT neutered,AVG(escape_attempts) FROM animals GROUP BY neutered;
-SELECT neutered, MIN(weight_kg), MAX(weight_kg) FROM animals GROUP BY neutered;
-SELECT neutered, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-01-01' GROUP BY neutered;
+SELECT species, MIN(weight_kg), MAX(weight_kg) FROM animals GROUP BY species;
+SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31' GROUP BY species;
