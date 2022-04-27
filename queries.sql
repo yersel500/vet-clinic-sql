@@ -19,18 +19,18 @@ ROLLBACK;
 SELECT * FROM animals;
 
 BEGIN;
-UPDATE animaltests SET species = 'digimon' WHERE name LIKE '%m
+UPDATE animals SET species = 'digimon' WHERE name LIKE '%m
 on';
-UPDATE animaltests SET species = 'pokemon' WHERE species <> 'digimon';
-SELECT * FROM animaltests;
+UPDATE animals SET species = 'pokemon' WHERE species <> 'digimon';
+SELECT * FROM animals;
 COMMIT;
-SELECT * FROM animaltests;
+SELECT * FROM animals;
 
 BEGIN;
-DELETE FROM animaltests;
-SELECT * FROM animaltests;
+DELETE FROM animals;
+SELECT * FROM animals;
 ROLLBACK;
-SELECT * FROM animaltests;
+SELECT * FROM animals;
 
 BEGIN;
 DELETE FROM animals WHERE date_of_birth > '2022-01-01';
@@ -48,11 +48,11 @@ SELECT species, MIN(weight_kg), MAX(weight_kg) FROM animals GROUP BY species;
 SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31' GROUP BY species;
 
 
-SELECT full_name,owners.id,name,owner_id FROM owners INNER JOIN animaltests ON owners.id = owner_id WHERE full_name = 'Melody Pond';
-SELECT animaltests.name,species_id,species.name,species.id FROM animaltests INNER JOIN species ON species_id = species.id WHERE species.name = 'Pokemon';
-SELECT full_name,owners.id,name,owner_id FROM owners LEFT JOIN animaltests ON owners.id = owner_id;
-SELECT COUNT(species.name) FROM species INNER JOIN animaltests ON species.id = species_id WHERE species.name = 'Pokemon';
-SELECT COUNT(species.name) FROM species INNER JOIN animaltests ON species.id = species_id WHERE species.name = 'Digimon';
-SELECT full_name, species_id, animaltests.name FROM owners INNER JOIN animaltests ON owners.id = owner_id WHERE species_id = (SELECT id FROM species WHERE name = 'Digimon') AND full_name = 'Jennifer Orwell';
-SELECT full_name, species_id, animaltests.name FROM owners INNER JOIN animaltests ON owners.id = owner_id WHERE escape_attempts = 0 AND full_name = 'Dean Winchester';
-SELECT full_name, COUNT(name) FROM (SELECT full_name, species_id, animaltests.name FROM owners INNER JOIN animaltests ON owners.id = owner_id) AS derivedTable GROUP BY full_name;
+SELECT full_name,owners.id,name,owner_id FROM owners INNER JOIN animals ON owners.id = owner_id WHERE full_name = 'Melody Pond';
+SELECT animals.name,species_id,species.name,species.id FROM animals INNER JOIN species ON species_id = species.id WHERE species.name = 'Pokemon';
+SELECT full_name,owners.id,name,owner_id FROM owners LEFT JOIN animals ON owners.id = owner_id;
+SELECT COUNT(species.name) FROM species INNER JOIN animals ON species.id = species_id WHERE species.name = 'Pokemon';
+SELECT COUNT(species.name) FROM species INNER JOIN animals ON species.id = species_id WHERE species.name = 'Digimon';
+SELECT full_name, species_id, animals.name FROM owners INNER JOIN animals ON owners.id = owner_id WHERE species_id = (SELECT id FROM species WHERE name = 'Digimon') AND full_name = 'Jennifer Orwell';
+SELECT full_name, species_id, animals.name FROM owners INNER JOIN animals ON owners.id = owner_id WHERE escape_attempts = 0 AND full_name = 'Dean Winchester';
+SELECT full_name, COUNT(name) FROM (SELECT full_name, species_id, animals.name FROM owners INNER JOIN animals ON owners.id = owner_id) AS derivedTable GROUP BY full_name;
