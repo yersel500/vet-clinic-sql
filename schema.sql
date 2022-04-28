@@ -24,15 +24,15 @@ CREATE TABLE species (
 );
 
 BEGIN;
-CREATE SEQUENCE my_serial AS INTEGER START 12 OWNED BY animaltests.id;
-ALTER TABLE animaltests ALTER COLUMN id SET DEFAULT nextval('my_serial');
+CREATE SEQUENCE my_serial AS INTEGER START 12 OWNED BY animals.id;
+ALTER TABLE animals ALTER COLUMN id SET DEFAULT nextval('my_serial');
 COMMIT;
 
 BEGIN;
-ALTER TABLE animaltests DROP COLUMN species;
-ALTER TABLE animaltests ADD COLUMN species_id INT;
-ALTER TABLE animaltests ADD FOREIGN KEY (species_id) REFERENCES species (id);
-ALTER TABLE animaltests ADD COLUMN owner_id INT;
-ALTER TABLE animaltests ADD FOREIGN KEY (owner_id) REFERENCES owners (id);
+ALTER TABLE animals DROP COLUMN species;
+ALTER TABLE animals ADD COLUMN species_id INT;
+ALTER TABLE animals ADD FOREIGN KEY (species_id) REFERENCES species (id);
+ALTER TABLE animals ADD COLUMN owner_id INT;
+ALTER TABLE animals ADD FOREIGN KEY (owner_id) REFERENCES owners (id);
 COMMIT;
 
