@@ -57,3 +57,7 @@ CREATE TABLE visits (
     CONSTRAINT fk_vets FOREIGN KEY(vet_id) REFERENCES vets(id),
     CONSTRAINT fk_animals FOREIGN KEY(anim_id) REFERENCES animals(id)
 );
+
+--  IMPROVE TIME OF EXECUTUON ON: SELECT COUNT(*) FROM visits where animal_id = 4;
+ CREATE INDEX visits_animals_index ON visits(animal_id);
+ 
